@@ -32,10 +32,10 @@ export function SecureApp({currentUserEmail}) {
 
     return (
         <>
-        {status === "INACTIVE" && (
-            <Activation currentUserEmail={userEmail} />
-        )}
-        {status === "ACTIVE" && (
+        {/*{status === "INACTIVE" && (*/}
+        {/*    <Activation currentUserEmail={userEmail} />*/}
+        {/*)}*/}
+        {/*{status === "ACTIVE" && (*/}
             <div>
                 <Theme>
                     <Routes>
@@ -44,7 +44,7 @@ export function SecureApp({currentUserEmail}) {
                     </Routes>
                 </Theme>
             </div>
-        )}
+        {/*)}*/}
         </>
     );
 }

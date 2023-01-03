@@ -28,8 +28,8 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://www.applyproof.com/">
-                Applyproof Trusthub
+            <Link color="inherit" href="https://www.cloudster.ca/">
+                Cloudster Inc.
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

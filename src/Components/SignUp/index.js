@@ -12,16 +12,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {Component, useState} from "react";
-import {API, Auth} from "aws-amplify";
+import {useState} from "react";
+import {Auth} from "aws-amplify";
 
 const theme = createTheme();
 
 export function CustomSignUp(props) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [jobTitle, setJobTitle] = useState('')
-    const [organization, setOrganization] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
@@ -33,59 +31,33 @@ export function CustomSignUp(props) {
             setError('Password does not match.')
         } else{
             setError('')
-            let promise = postData({
-                firstName,
-                lastName,
-                jobTitle,
-                organization,
-                email,
-                phone,
-                password
-            });
             signUp({email, password}).then(e => {
                 props.updateAuthState('confirmSignUp')
             })
-
-            promise.then(result => {
-                console.log(result.body)
-            });
         }
         event.preventDefault();
     };
 
     async function signUp(options) {
         try {
-            const {user} = await Auth.signUp({
+            const user = await Auth.signUp({
                 username: options.email,
                 password: options.password,
                 attributes: {
-                    email: options.email,
+                    email: options.email,          // optional
+                    // phone: options.phone,
+                    // givenName: options.firstName,
+                    // familyName: options.lastName
+                },
+                autoSignIn: { // optional - enables auto sign in after user is confirmed
+                    enabled: true,
                 }
-            });
+            })
             props.setEmail(options.email)
             console.log(user);
         } catch (error) {
             console.log('error signing up:', error);
         }
-    }
-
-    async function postData(options) {
-        const apiName = 'registrationAPI';
-        const path = '/register';
-        const myInit = {
-            body: {
-                firstName: options.firstName,
-                lastName: options.lastName,
-                jobTitle: options.jobTitle,
-                organization: options.organization,
-                email: options.email,
-                password: options.password,
-                phone: options.phone,
-            },
-            headers: {},
-        };
-
-        return await API.post(apiName, path, myInit);
     }
 
     return (
@@ -129,30 +101,6 @@ export function CustomSignUp(props) {
                                     name="lastName"
                                     autoComplete="family-name"
                                     onChange={event => setLastName(event.target.value)}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="job-title"
-                                    name="jobTitle"
-                                    required
-                                    fullWidth
-                                    id="jobTitle"
-                                    label="Job Title"
-                                    autoFocus
-                                    onChange={event => setJobTitle(event.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="organizarion"
-                                    required
-                                    fullWidth
-                                    id="organization"
-                                    label="Organization"
-                                    name="organization"
-                                    onChange={event => setOrganization(event.target.value)}
                                 />
                             </Grid>
 

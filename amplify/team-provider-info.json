@@ -10,6 +10,14 @@
       "StackName": "amplify-portalreactamplify-dev-193811",
       "StackId": "arn:aws:cloudformation:us-east-1:057260886102:stack/amplify-portalreactamplify-dev-193811/6b2674b0-7f35-11ed-9ef0-12769bcbef69",
       "AmplifyAppId": "ddmxs65cd4qcv"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "ddmxs65cd4qcv",
+          "type": "manual"
+        }
+      }
     }
   }
 }
