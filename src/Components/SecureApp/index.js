@@ -4,7 +4,7 @@ import UserManagement from "../UserManagement";
 import Theme from "../Theme";
 import React, {useEffect, useState} from "react";
 import {Auth} from "aws-amplify";
-import {Activation} from "../Activation";
+
 
 
 export function SecureApp({currentUserEmail}) {
